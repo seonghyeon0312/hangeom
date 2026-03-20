@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>센터 소개 | 한겸복지센터</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ff8b42",
+              "background-light": "#f8f7f5",
+              "background-dark": "#23170f",
+              sage: "#8da399",
+            },
+            fontFamily: {
+              display: ["Lexend", "Noto Sans KR", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Lexend", "Noto Sans KR", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+  <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 w-full bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-primary/10 px-6 lg:px-20 py-4">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="bg-primary p-2 rounded-lg text-white">
+            <span class="material-symbols-outlined block">volunteer_activism</span>
+          </div>
+          <a href="index.html" class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white hover:text-primary transition-colors">한겸복지센터</a>
+        </div>
+        <div class="hidden md:flex items-center gap-10">
+          <div class="flex gap-8">
+            <a class="text-base font-bold text-primary" href="about.html">센터소개</a>
+            <a class="text-base font-medium hover:text-primary transition-colors" href="programs.html">프로그램 안내</a>
+            <a class="text-base font-medium hover:text-primary transition-colors" href="notice.html">공지사항</a>
+            <a class="text-base font-medium hover:text-primary transition-colors" href="location.html">오시는 길</a>
+          </div>
+          <a href="location.html" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+            상담 문의하기
+          </a>
+        </div>
+        <button id="menu-btn" class="md:hidden text-slate-900 dark:text-white">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-primary/10 pt-4 flex flex-col gap-4">
+        <a class="text-base font-bold text-primary" href="about.html">센터소개</a>
+        <a class="text-base font-medium hover:text-primary transition-colors" href="programs.html">프로그램 안내</a>
+        <a class="text-base font-medium hover:text-primary transition-colors" href="notice.html">공지사항</a>
+        <a class="text-base font-medium hover:text-primary transition-colors" href="location.html">오시는 길</a>
+        <a href="location.html" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all text-center">
+          상담 문의하기
+        </a>
+      </div>
+    </nav>
+
+    <!-- 히어로 배너 -->
+    <section class="relative w-full py-24 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-primary via-orange-400 to-amber-300"></div>
+      <div class="absolute inset-0 bg-black/25"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-20">
+        <nav class="flex items-center gap-2 text-white/70 text-sm mb-5">
+          <a href="index.html" class="hover:text-white transition-colors">홈</a>
+          <span class="material-symbols-outlined" style="font-size:16px;">chevron_right</span>
+          <span class="text-white font-medium">센터 소개</span>
+        </nav>
+        <h1 class="text-5xl lg:text-6xl font-black text-white leading-tight">센터 소개</h1>
+        <p class="text-white/80 text-xl mt-4">한겸복지센터를 소개합니다</p>
+      </div>
+    </section>
+
+    <!-- 인사말 -->
+    <section class="py-20 bg-white dark:bg-slate-900/50">
+      <div class="max-w-7xl mx-auto px-6 lg:px-20">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold uppercase tracking-widest text-sm">Greeting</span>
+          <h2 class="text-3xl font-bold mt-2">원장 인사말</h2>
+        </div>
+        <div class="flex flex-col lg:flex-row items-center gap-14">
+          <div class="flex-shrink-0">
+            <div class="w-64 h-72 rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary/20 to-sage/20 flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary" style="font-size:96px;">person</span>
+            </div>
+            <div class="text-center mt-5">
+              <p class="font-bold text-xl">김한겸 원장</p>
+              <p class="text-slate-500 mt-1">한겸복지센터 대표</p>
+            </div>
+          </div>
+          <div class="flex-1">
+            <div class="relative">
+              <span class="text-primary/10 font-black text-9xl absolute -top-8 -left-6 select-none leading-none">"</span>
+              <div class="relative z-10 space-y-5 text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                <p>
+                  한겸복지센터를 방문해 주신 여러분을 진심으로 환영합니다.
+                </p>
+                <p>
+                  저희 한겸복지센터는 지역사회 어르신들의 건강하고 행복한 노후 생활을 지원하기 위해 설립되었습니다. 정성이 담긴 다양한 프로그램과 따뜻한 복지 서비스를 통해 어르신 한 분 한 분의 삶에 활력을 드리고자 최선을 다하고 있습니다.
+                </p>
+                <p>
+                  어르신들이 서로 어울리며 즐거운 시간을 보내실 수 있도록, 그리고 건강하고 의미 있는 노년을 보내실 수 있도록 저희 직원 모두가 한마음으로 노력하겠습니다.
+                </p>
+                <p>
+                  앞으로도 변함없는 사랑과 관심 부탁드리겠습니다. 감사합니다.
+                </p>
+              </div>
+              <div class="mt-8 flex items-center gap-4">
+                <div class="h-1 w-16 bg-primary rounded-full"></div>
+                <span class="font-bold text-primary text-lg">한겸복지센터장 김한겸</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 설립 목적 & 비전 -->
+    <section class="py-20 bg-background-light dark:bg-background-dark">
+      <div class="max-w-7xl mx-auto px-6 lg:px-20">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold uppercase tracking-widest text-sm">Mission & Vision</span>
+          <h2 class="text-3xl font-bold mt-2">설립 목적 및 비전</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border border-primary/5 text-center group hover:-translate-y-2 transition-transform">
+            <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+              <span class="material-symbols-outlined" style="font-size:40px;">favorite</span>
+            </div>
+            <h3 class="text-xl font-bold mb-4">설립 목적</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+              지역사회 어르신들의 건강 증진과 사회 참여 기회 확대를 통해 존엄하고 행복한 노후 생활을 실현합니다.
+            </p>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border border-primary/5 text-center group hover:-translate-y-2 transition-transform">
+            <div class="w-20 h-20 bg-sage/10 rounded-full flex items-center justify-center text-sage mx-auto mb-6 group-hover:bg-sage group-hover:text-white transition-colors">
+              <span class="material-symbols-outlined" style="font-size:40px;">visibility</span>
+            </div>
+            <h3 class="text-xl font-bold mb-4">비전</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+              어르신이 주체가 되는 따뜻한 복지 공동체를 만들어 나가며, 지역사회와 함께 성장하는 노인복지 전문기관이 됩니다.
+            </p>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border border-primary/5 text-center group hover:-translate-y-2 transition-transform">
+            <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+              <span class="material-symbols-outlined" style="font-size:40px;">star</span>
+            </div>
+            <h3 class="text-xl font-bold mb-4">핵심 가치</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+              존중·전문성·공감을 바탕으로 어르신 한 분 한 분을 가족처럼 섬기며, 신뢰받는 복지 서비스를 제공합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 주요 연혁 -->
+    <section class="py-20 bg-white dark:bg-slate-900/50">
+      <div class="max-w-7xl mx-auto px-6 lg:px-20">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold uppercase tracking-widest text-sm">History</span>
+          <h2 class="text-3xl font-bold mt-2">주요 연혁</h2>
+        </div>
+        <div class="relative max-w-3xl mx-auto">
+          <!-- 세로선 -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-primary/20"></div>
+          <!-- 연혁 항목 -->
+          <div class="space-y-10">
+
+            <div class="flex items-start gap-6 flex-row-reverse md:flex-row">
+              <div class="flex-1 text-right md:text-left hidden md:block"></div>
+              <div class="flex-shrink-0 relative z-10">
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-primary/30">
+                  <span class="material-symbols-outlined text-sm">verified</span>
+                </div>
+              </div>
+              <div class="flex-1 bg-background-light dark:bg-slate-800 rounded-xl p-6 shadow-md">
+                <span class="text-primary font-bold text-sm">2010년 3월</span>
+                <p class="font-bold text-lg mt-1">한겸복지센터 설립 인가</p>
+                <p class="text-slate-500 text-base mt-1">서울특별시 강남구 노인복지센터 정식 인가 취득</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-6">
+              <div class="flex-1 bg-background-light dark:bg-slate-800 rounded-xl p-6 shadow-md text-right">
+                <span class="text-primary font-bold text-sm">2012년 6월</span>
+                <p class="font-bold text-lg mt-1">건강증진프로그램 개설</p>
+                <p class="text-slate-500 text-base mt-1">체조·요가·스포츠댄스 등 건강 특화 프로그램 도입</p>
+              </div>
+              <div class="flex-shrink-0 relative z-10">
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-primary/30">
+                  <span class="material-symbols-outlined text-sm">health_and_safety</span>
+                </div>
+              </div>
+              <div class="flex-1 hidden md:block"></div>
+            </div>
+
+            <div class="flex items-start gap-6 flex-row-reverse md:flex-row">
+              <div class="flex-1 hidden md:block"></div>
+              <div class="flex-shrink-0 relative z-10">
+                <div class="w-12 h-12 bg-sage rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-sage/30">
+                  <span class="material-symbols-outlined text-sm">emoji_events</span>
+                </div>
+              </div>
+              <div class="flex-1 bg-background-light dark:bg-slate-800 rounded-xl p-6 shadow-md">
+                <span class="text-sage font-bold text-sm">2015년 11월</span>
+                <p class="font-bold text-lg mt-1">보건복지부 우수기관 표창</p>
+                <p class="text-slate-500 text-base mt-1">어르신 삶의 질 향상에 기여한 공로로 보건복지부 장관 표창 수상</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-6">
+              <div class="flex-1 bg-background-light dark:bg-slate-800 rounded-xl p-6 shadow-md text-right">
+                <span class="text-primary font-bold text-sm">2018년 4월</span>
+                <p class="font-bold text-lg mt-1">시설 증축 및 리모델링</p>
+                <p class="text-slate-500 text-base mt-1">연면적 확대 및 최신 복지 시설로 전면 리뉴얼 완공</p>
+              </div>
+              <div class="flex-shrink-0 relative z-10">
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-primary/30">
+                  <span class="material-symbols-outlined text-sm">apartment</span>
+                </div>
+              </div>
+              <div class="flex-1 hidden md:block"></div>
+            </div>
+
+            <div class="flex items-start gap-6 flex-row-reverse md:flex-row">
+              <div class="flex-1 hidden md:block"></div>
+              <div class="flex-shrink-0 relative z-10">
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-primary/30">
+                  <span class="material-symbols-outlined text-sm">groups</span>
+                </div>
+              </div>
+              <div class="flex-1 bg-background-light dark:bg-slate-800 rounded-xl p-6 shadow-md">
+                <span class="text-primary font-bold text-sm">2021년 9월</span>
+                <p class="font-bold text-lg mt-1">이용자 1,000명 돌파</p>
+                <p class="text-slate-500 text-base mt-1">등록 이용자 누적 1,000명 달성, 지역 대표 노인복지센터로 성장</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-6">
+              <div class="flex-1 bg-background-light dark:bg-slate-800 rounded-xl p-6 shadow-md text-right">
+                <span class="text-primary font-bold text-sm">2024년 현재</span>
+                <p class="font-bold text-lg mt-1">지속적인 서비스 확대</p>
+                <p class="text-slate-500 text-base mt-1">디지털 교육, 심리상담 등 시대에 맞는 신규 프로그램 운영 중</p>
+              </div>
+              <div class="flex-shrink-0 relative z-10">
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white shadow-lg shadow-primary/30 ring-4 ring-primary/30">
+                  <span class="material-symbols-outlined text-sm">flag</span>
+                </div>
+              </div>
+              <div class="flex-1 hidden md:block"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 조직도 -->
+    <section class="py-20 bg-background-light dark:bg-background-dark">
+      <div class="max-w-7xl mx-auto px-6 lg:px-20">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold uppercase tracking-widest text-sm">Organization</span>
+          <h2 class="text-3xl font-bold mt-2">조직도</h2>
+        </div>
+        <div class="max-w-3xl mx-auto">
+          <!-- 원장 -->
+          <div class="flex justify-center mb-8">
+            <div class="bg-primary text-white rounded-xl px-10 py-4 font-bold text-lg shadow-lg shadow-primary/30 text-center min-w-[160px]">
+              원장
+            </div>
+          </div>
+          <div class="flex justify-center mb-8">
+            <div class="w-0.5 h-8 bg-primary/30"></div>
+          </div>
+          <!-- 사무국장 -->
+          <div class="flex justify-center mb-8">
+            <div class="bg-white dark:bg-slate-800 border-2 border-primary/30 rounded-xl px-10 py-4 font-bold text-lg text-center shadow-md min-w-[160px]">
+              사무국장
+            </div>
+          </div>
+          <!-- 연결선 -->
+          <div class="flex justify-center mb-0">
+            <div class="w-0.5 h-8 bg-primary/30"></div>
+          </div>
+          <div class="relative flex justify-center">
+            <div class="absolute top-0 left-[calc(50%-200px)] right-[calc(50%-200px)] h-0.5 bg-primary/20"></div>
+          </div>
+          <!-- 부서들 -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md text-center border border-primary/10">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-3">
+                <span class="material-symbols-outlined">health_and_safety</span>
+              </div>
+              <p class="font-bold">건강복지팀</p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md text-center border border-primary/10">
+              <div class="w-12 h-12 bg-sage/10 rounded-full flex items-center justify-center text-sage mx-auto mb-3">
+                <span class="material-symbols-outlined">palette</span>
+              </div>
+              <p class="font-bold">문화여가팀</p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md text-center border border-primary/10">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-3">
+                <span class="material-symbols-outlined">school</span>
+              </div>
+              <p class="font-bold">교육지원팀</p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md text-center border border-primary/10">
+              <div class="w-12 h-12 bg-sage/10 rounded-full flex items-center justify-center text-sage mx-auto mb-3">
+                <span class="material-symbols-outlined">diversity_3</span>
+              </div>
+              <p class="font-bold">상담복지팀</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-[#f2efe9] dark:bg-slate-900 py-16">
+      <div class="max-w-7xl mx-auto px-6 lg:px-20 grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div>
+          <div class="flex items-center gap-2 mb-6">
+            <span class="material-symbols-outlined text-primary">volunteer_activism</span>
+            <span class="text-xl font-bold">한겸복지센터</span>
+          </div>
+          <div class="space-y-3 text-slate-600 dark:text-slate-400">
+            <p class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary text-xl">location_on</span>
+              <span>서울특별시 강남구 테헤란로 123<br />한겸빌딩 3층</span>
+            </p>
+            <p class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary text-xl">call</span>
+              <span>02-1234-5678</span>
+            </p>
+            <p class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary text-xl">schedule</span>
+              <span>평일 09:00 - 18:00 (주말/공휴일 휴무)</span>
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-6">
+          <h4 class="font-bold text-lg border-b border-primary/20 pb-2">빠른 메뉴</h4>
+          <div class="grid grid-cols-2 gap-3">
+            <a class="hover:text-primary transition-colors" href="programs.html">이용 안내</a>
+            <a class="hover:text-primary transition-colors" href="#">자원봉사 신청</a>
+            <a class="hover:text-primary transition-colors" href="#">후원 안내</a>
+            <a class="hover:text-primary transition-colors" href="#">식단표 확인</a>
+            <a class="hover:text-primary transition-colors" href="#">갤러리</a>
+            <a class="hover:text-primary transition-colors" href="#">인재 채용</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-6">
+          <h4 class="font-bold text-lg border-b border-primary/20 pb-2">소셜 네트워크</h4>
+          <div class="flex gap-4">
+            <a class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center text-primary shadow-sm hover:bg-primary hover:text-white transition-all" href="#">
+              <span class="material-symbols-outlined">camera</span>
+            </a>
+            <a class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center text-primary shadow-sm hover:bg-primary hover:text-white transition-all" href="#">
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </a>
+            <a class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center text-primary shadow-sm hover:bg-primary hover:text-white transition-all" href="#">
+              <span class="material-symbols-outlined">play_circle</span>
+            </a>
+          </div>
+          <div class="mt-4 p-4 bg-white/50 dark:bg-slate-800/50 rounded-xl">
+            <p class="text-sm text-slate-500">Copyright © 2024 한겸복지센터. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+  </body>
+</html>
