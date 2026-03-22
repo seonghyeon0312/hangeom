@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <script
       type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00d6c23f1913c99c0fedbcf3bc406c1b&libraries=services"
+      src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=00d6c23f1913c99c0fedbcf3bc406c1b"
     ></script>
   </head>
   <body
@@ -433,33 +433,25 @@
 
     <script src="js/components.js"></script>
     <script>
-      // 카카오맵 초기화 (주소 → 좌표 변환 후 표시)
+      // 카카오맵 초기화 (경상북도 구미시 선산대로 51)
       (function initKakaoMap() {
         if (typeof kakao === "undefined" || typeof kakao.maps === "undefined")
           return;
 
         var container = document.getElementById("kakao-map");
-        var geocoder = new kakao.maps.services.Geocoder();
+        var coords = new kakao.maps.LatLng(36.37461, 128.29083);
+        var map = new kakao.maps.Map(container, { center: coords, level: 3 });
 
-        geocoder.addressSearch("경상북도 구미시 선산대로 51", function (result, status) {
-          var coords =
-            status === kakao.maps.services.Status.OK
-              ? new kakao.maps.LatLng(result[0].y, result[0].x)
-              : new kakao.maps.LatLng(36.3738, 128.2932);
+        var marker = new kakao.maps.Marker({ map: map, position: coords });
 
-          var map = new kakao.maps.Map(container, { center: coords, level: 3 });
-
-          var marker = new kakao.maps.Marker({ map: map, position: coords });
-
-          var infowindow = new kakao.maps.InfoWindow({
-            content:
-              '<div style="padding:8px 12px;font-size:14px;font-weight:bold;color:#ff8b42;">한겸복지센터</div>',
-          });
-          infowindow.open(map, marker);
-
-          map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
-          map.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
+        var infowindow = new kakao.maps.InfoWindow({
+          content:
+            '<div style="padding:8px 12px;font-size:14px;font-weight:bold;color:#ff8b42;">한겸복지센터</div>',
         });
+        infowindow.open(map, marker);
+
+        map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
+        map.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
       })();
     </script>
   </body>
