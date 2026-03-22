@@ -440,7 +440,7 @@
           return;
 
         var container = document.getElementById("kakao-map");
-        var coords = new kakao.maps.LatLng(36.37461, 128.29083);
+        var coords = new kakao.maps.LatLng(36.134649265, 128.344819859);
         var map = new kakao.maps.Map(container, { center: coords, level: 3 });
 
         var marker = new kakao.maps.Marker({ map: map, position: coords });
@@ -451,8 +451,14 @@
         });
         infowindow.open(map, marker);
 
-        map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
-        map.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
+        map.addControl(
+          new kakao.maps.ZoomControl(),
+          kakao.maps.ControlPosition.RIGHT,
+        );
+        map.addControl(
+          new kakao.maps.MapTypeControl(),
+          kakao.maps.ControlPosition.TOPRIGHT,
+        );
       })();
     </script>
   </body>
