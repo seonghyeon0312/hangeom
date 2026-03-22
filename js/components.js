@@ -1,12 +1,12 @@
 (function () {
   // 현재 페이지 감지
-  const page = location.pathname.split('/').pop() || 'index.html';
+  const page = location.pathname.split("/").pop() || "index.html";
 
   // 네비게이션 링크 클래스 생성 헬퍼
   function navLinkClass(targetPage) {
     return page === targetPage
-      ? 'text-base font-bold text-primary'
-      : 'text-base font-medium hover:text-primary transition-colors';
+      ? "text-base font-bold text-primary"
+      : "text-base font-medium hover:text-primary transition-colors";
   }
 
   // nav 템플릿
@@ -21,10 +21,10 @@
         </div>
         <div class="hidden md:flex items-center gap-10">
           <div class="flex gap-8">
-            <a class="${navLinkClass('about.html')}" href="about.html">센터소개</a>
-            <a class="${navLinkClass('programs.html')}" href="programs.html">프로그램 안내</a>
-            <a class="${navLinkClass('notice.html')}" href="notice.html">공지사항</a>
-            <a class="${navLinkClass('location.html')}" href="location.html">오시는 길</a>
+            <a class="${navLinkClass("about.html")}" href="about.html">센터소개</a>
+            <a class="${navLinkClass("programs.html")}" href="programs.html">프로그램 안내</a>
+            <a class="${navLinkClass("notice.html")}" href="notice.html">공지사항</a>
+            <a class="${navLinkClass("location.html")}" href="location.html">오시는 길</a>
           </div>
           <a href="location.html" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
             상담 문의하기
@@ -35,10 +35,10 @@
         </button>
       </div>
       <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-primary/10 pt-4 flex flex-col gap-4">
-        <a class="${navLinkClass('about.html')}" href="about.html">센터소개</a>
-        <a class="${navLinkClass('programs.html')}" href="programs.html">프로그램 안내</a>
-        <a class="${navLinkClass('notice.html')}" href="notice.html">공지사항</a>
-        <a class="${navLinkClass('location.html')}" href="location.html">오시는 길</a>
+        <a class="${navLinkClass("about.html")}" href="about.html">센터소개</a>
+        <a class="${navLinkClass("programs.html")}" href="programs.html">프로그램 안내</a>
+        <a class="${navLinkClass("notice.html")}" href="notice.html">공지사항</a>
+        <a class="${navLinkClass("location.html")}" href="location.html">오시는 길</a>
         <a href="location.html" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all text-center">
           상담 문의하기
         </a>
@@ -62,7 +62,7 @@
             </p>
             <p class="flex items-center gap-3">
               <span class="material-symbols-outlined text-primary text-xl">call</span>
-              <span>02-1234-5678</span>
+              <span>054-443-0546</span>
             </p>
             <p class="flex items-center gap-3">
               <span class="material-symbols-outlined text-primary text-xl">schedule</span>
@@ -103,19 +103,19 @@
   `;
 
   // DOM 준비 후 주입 및 초기화
-  document.addEventListener('DOMContentLoaded', function () {
-    var navEl = document.getElementById('nav-placeholder');
+  document.addEventListener("DOMContentLoaded", function () {
+    var navEl = document.getElementById("nav-placeholder");
     if (navEl) navEl.innerHTML = navHTML;
 
-    var footerEl = document.getElementById('footer-placeholder');
+    var footerEl = document.getElementById("footer-placeholder");
     if (footerEl) footerEl.innerHTML = footerHTML;
 
     // 햄버거 메뉴 토글
-    var menuBtn = document.getElementById('menu-btn');
-    var mobileMenu = document.getElementById('mobile-menu');
+    var menuBtn = document.getElementById("menu-btn");
+    var mobileMenu = document.getElementById("mobile-menu");
     if (menuBtn && mobileMenu) {
-      menuBtn.addEventListener('click', function () {
-        mobileMenu.classList.toggle('hidden');
+      menuBtn.addEventListener("click", function () {
+        mobileMenu.classList.toggle("hidden");
       });
     }
   });
