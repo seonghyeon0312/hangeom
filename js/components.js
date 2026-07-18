@@ -14,10 +14,10 @@
     },
     {
       label: "공동생활가정·주간보호",
-      pages: ["newsletter.html", "snack-menu.html", "monthly-plan.html", "activities.html", "home-care.html", "care-activity.html"],
+      pages: ["newsletter.html", "meal-plan.html", "monthly-plan.html", "activities.html", "home-care.html", "care-activity.html"],
       children: [
         { label: "소식지",          href: "newsletter.html"   },
-        { label: "간식식단표",      href: "snack-menu.html"   },
+        { label: "월간 식단표",      href: "meal-plan.html"    },
         { label: "월간계획표",      href: "monthly-plan.html" },
         { label: "인지활동/신체활동", href: "activities.html"  },
         { label: "방문요양안내",    href: "home-care.html"    },
