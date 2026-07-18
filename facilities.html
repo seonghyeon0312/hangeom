@@ -13,6 +13,7 @@
   <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
     <div id="nav-placeholder"></div>
 
+    <!-- 히어로 배너 -->
     <section class="relative w-full py-24 overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-600 to-slate-500"></div>
       <div class="absolute inset-0 bg-black/25"></div>
@@ -25,19 +26,91 @@
           <span class="text-white font-medium">시설</span>
         </nav>
         <h1 class="text-5xl lg:text-6xl font-black text-white leading-tight">시설</h1>
-        <p class="text-white/80 text-xl mt-4">한겸복지센터의 시설을 소개합니다</p>
+        <p class="text-white/80 text-xl mt-4">한겸복지센터의 쾌적하고 안전한 시설을 소개합니다</p>
       </div>
     </section>
 
-    <section class="py-32 bg-white dark:bg-slate-900/50">
-      <div class="max-w-7xl mx-auto px-6 lg:px-20 text-center">
-        <span class="material-symbols-outlined text-slate-300 dark:text-slate-600" style="font-size:80px;">construction</span>
-        <p class="text-2xl font-bold mt-6 text-slate-400">준비 중입니다</p>
-        <p class="text-slate-400 mt-3 text-lg">곧 내용이 업데이트될 예정입니다.</p>
-        <a href="index.html" class="inline-flex items-center gap-2 mt-8 text-primary font-bold hover:underline">
-          <span class="material-symbols-outlined">arrow_back</span>
-          홈으로 돌아가기
-        </a>
+    <!-- 시설 특징 -->
+    <section class="py-20 bg-white dark:bg-slate-900/50">
+      <div class="max-w-7xl mx-auto px-6 lg:px-20">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold uppercase tracking-widest text-sm">Facilities</span>
+          <h2 class="text-3xl font-bold mt-2">시설 안내</h2>
+          <p class="text-slate-500 mt-3 text-lg">어르신들이 편안하고 안전하게 생활하실 수 있도록<br>최적의 환경을 갖추고 있습니다</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 주차 -->
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-8 shadow-md border border-primary/5 group hover:-translate-y-2 transition-transform">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+              <span class="material-symbols-outlined" style="font-size:32px;">local_parking</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">주차 공간</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">센터 앞 차량 6~8대 주차 가능</p>
+          </div>
+          <!-- 활동공간 -->
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-8 shadow-md border border-primary/5 group hover:-translate-y-2 transition-transform">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+              <span class="material-symbols-outlined" style="font-size:32px;">meeting_room</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">쾌적한 활동공간</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">어르신들의 다양한 활동과 프로그램을 위한 넓고 쾌적한 공간</p>
+          </div>
+          <!-- 방 -->
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-8 shadow-md border border-primary/5 group hover:-translate-y-2 transition-transform">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+              <span class="material-symbols-outlined" style="font-size:32px;">bed</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">안락한 방 3개</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">공동생활가정 어르신들을 위한 안락하고 편안한 방 3개 운영</p>
+          </div>
+          <!-- 화장실 -->
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-8 shadow-md border border-primary/5 group hover:-translate-y-2 transition-transform">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+              <span class="material-symbols-outlined" style="font-size:32px;">wc</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">남/여 화장실 별도</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">남성·여성 화장실을 분리하여 프라이버시와 위생을 철저히 보호</p>
+          </div>
+          <!-- 샤워실 -->
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-8 shadow-md border border-primary/5 group hover:-translate-y-2 transition-transform">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+              <span class="material-symbols-outlined" style="font-size:32px;">shower</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">샤워실 구비</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">어르신들의 청결한 위생 관리를 위한 샤워실 완비</p>
+          </div>
+          <!-- 창문 -->
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-8 shadow-md border border-primary/5 group hover:-translate-y-2 transition-transform">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+              <span class="material-symbols-outlined" style="font-size:32px;">window</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">환기용 큰 창문</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">각 방마다 환기를 위한 큰 창문으로 언제나 맑고 쾌적한 실내 환경 유지</p>
+          </div>
+          <!-- 상담실 -->
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-8 shadow-md border border-primary/5 group hover:-translate-y-2 transition-transform sm:col-span-2 lg:col-span-3 lg:max-w-sm lg:mx-auto w-full">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+              <span class="material-symbols-outlined" style="font-size:32px;">groups</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">별도 상담실</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">어르신들의 편안한 환경을 위해 상담실은 센터 옆 별도 설치 완료</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 문의 CTA -->
+    <section class="py-20 bg-background-light dark:bg-background-dark">
+      <div class="max-w-3xl mx-auto px-6 lg:px-20 text-center">
+        <div class="bg-primary/5 border border-primary/20 rounded-2xl p-10">
+          <span class="material-symbols-outlined text-primary" style="font-size:48px;">support_agent</span>
+          <h3 class="text-2xl font-bold mt-4 mb-3">시설 방문 안내</h3>
+          <p class="text-slate-600 dark:text-slate-400 mb-6">시설을 직접 방문하셔서 확인해 보세요. 친절하게 안내해 드리겠습니다.</p>
+          <a href="location.html" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-full font-bold hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+            <span class="material-symbols-outlined">location_on</span>
+            오시는 길 보기
+          </a>
+        </div>
       </div>
     </section>
 
