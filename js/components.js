@@ -58,15 +58,15 @@
           <div class="space-y-3 text-slate-600 dark:text-slate-400">
             <p class="flex items-start gap-3">
               <span class="material-symbols-outlined text-primary text-xl">location_on</span>
-              <span>경상북도 구미시 선산대로 51</span>
+              <span>${SITE_INFO.address.road}</span>
             </p>
             <p class="flex items-center gap-3">
               <span class="material-symbols-outlined text-primary text-xl">call</span>
-              <span>054-443-0546</span>
+              <span>${SITE_INFO.phone.center}</span>
             </p>
             <p class="flex items-center gap-3">
               <span class="material-symbols-outlined text-primary text-xl">schedule</span>
-              <span>평일 09:00 - 18:00 (주말/공휴일 휴무)</span>
+              <span>평일 ${SITE_INFO.hours.weekday} (주말/공휴일 휴무)</span>
             </p>
           </div>
         </div>
@@ -83,16 +83,16 @@
         </div>
         <div class="flex flex-col gap-6">
           <h4 class="font-bold text-lg border-b border-primary/20 pb-2">소셜 네트워크</h4>
-          <div class="flex gap-4">
-            <a class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center text-primary shadow-sm hover:bg-primary hover:text-white transition-all" href="#">
-              <span class="material-symbols-outlined">camera</span>
-            </a>
-            <a class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center text-primary shadow-sm hover:bg-primary hover:text-white transition-all" href="#">
-              <span class="material-symbols-outlined">chat_bubble</span>
-            </a>
-            <a class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center text-primary shadow-sm hover:bg-primary hover:text-white transition-all" href="#">
-              <span class="material-symbols-outlined">play_circle</span>
-            </a>
+          <div class="flex flex-col gap-2">
+            ${SITE_INFO.social.map(s => `
+              <a href="${s.url}" target="_blank" rel="noopener noreferrer"
+                class="flex items-center gap-3 text-slate-600 dark:text-slate-400 hover:text-primary transition-colors group">
+                <div class="w-9 h-9 bg-white dark:bg-slate-700 rounded-full flex items-center justify-center text-primary shadow-sm flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+                  <span class="material-symbols-outlined" style="font-size:18px;">${s.icon}</span>
+                </div>
+                <span class="font-medium text-sm">${s.label}</span>
+              </a>
+            `).join('')}
           </div>
           <div class="mt-4 p-4 bg-white/50 dark:bg-slate-800/50 rounded-xl">
             <p class="text-sm text-slate-500">Copyright © 2024 한겸복지센터. All rights reserved.</p>
@@ -102,6 +102,63 @@
     </footer>
   `;
 
+  // 오시는 길 연락처 카드 (location.html #location-contact-placeholder에 주입)
+  const locationContactHTML = `
+    <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-6 shadow-md border border-primary/5">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0">
+          <span class="material-symbols-outlined">location_on</span>
+        </div>
+        <div>
+          <p class="font-bold text-lg mb-1">주소</p>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+            ${SITE_INFO.address.road}<br>
+            <span class="text-sm">(${SITE_INFO.address.jibun})</span><br>
+            <span class="text-sm">우편번호 ${SITE_INFO.address.postal}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-6 shadow-md border border-primary/5">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0">
+          <span class="material-symbols-outlined">call</span>
+        </div>
+        <div>
+          <p class="font-bold text-lg mb-1">전화번호</p>
+          <p class="text-slate-600 dark:text-slate-400">센터: <a href="tel:${SITE_INFO.phone.center}" class="text-primary font-bold hover:underline">${SITE_INFO.phone.center}</a></p>
+          <p class="text-slate-600 dark:text-slate-400 mt-1">대표: <a href="tel:${SITE_INFO.phone.rep}" class="text-primary font-bold hover:underline">${SITE_INFO.phone.rep}</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-6 shadow-md border border-primary/5">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0">
+          <span class="material-symbols-outlined">mail</span>
+        </div>
+        <div>
+          <p class="font-bold text-lg mb-1">이메일</p>
+          <a href="mailto:${SITE_INFO.email}" class="text-primary font-medium hover:underline">${SITE_INFO.email}</a>
+        </div>
+      </div>
+    </div>
+    <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-6 shadow-md border border-primary/5">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0">
+          <span class="material-symbols-outlined">schedule</span>
+        </div>
+        <div>
+          <p class="font-bold text-lg mb-2">운영 시간</p>
+          <div class="space-y-1 text-slate-600 dark:text-slate-400">
+            <p class="flex justify-between gap-8"><span>평일</span><span class="font-medium">${SITE_INFO.hours.weekday}</span></p>
+            <p class="flex justify-between gap-8"><span>토요일</span><span class="font-medium text-slate-400">${SITE_INFO.hours.saturday}</span></p>
+            <p class="flex justify-between gap-8"><span>일요일/공휴일</span><span class="font-medium text-slate-400">${SITE_INFO.hours.holiday}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
   // DOM 준비 후 주입 및 초기화
   document.addEventListener("DOMContentLoaded", function () {
     var navEl = document.getElementById("nav-placeholder");
@@ -109,6 +166,9 @@
 
     var footerEl = document.getElementById("footer-placeholder");
     if (footerEl) footerEl.innerHTML = footerHTML;
+
+    var locationContactEl = document.getElementById("location-contact-placeholder");
+    if (locationContactEl) locationContactEl.innerHTML = locationContactHTML;
 
     // 햄버거 메뉴 토글
     var menuBtn = document.getElementById("menu-btn");

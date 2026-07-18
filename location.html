@@ -66,99 +66,7 @@
           <div class="lg:col-span-2 flex flex-col gap-5">
             <h2 class="text-2xl font-bold">연락처 정보</h2>
 
-            <div
-              class="bg-background-light dark:bg-slate-800 rounded-2xl p-6 shadow-md border border-primary/5"
-            >
-              <div class="flex items-start gap-4">
-                <div
-                  class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0"
-                >
-                  <span class="material-symbols-outlined">location_on</span>
-                </div>
-                <div>
-                  <p class="font-bold text-lg mb-1">주소</p>
-                  <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                    경상북도 구미시 선산대로 51
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="bg-background-light dark:bg-slate-800 rounded-2xl p-6 shadow-md border border-primary/5"
-            >
-              <div class="flex items-start gap-4">
-                <div
-                  class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0"
-                >
-                  <span class="material-symbols-outlined">call</span>
-                </div>
-                <div>
-                  <p class="font-bold text-lg mb-1">전화번호</p>
-                  <p class="text-slate-600 dark:text-slate-400">
-                    대표:
-                    <a
-                      href="tel:02-1234-5678"
-                      class="text-primary font-bold hover:underline"
-                      >02-1234-5678</a
-                    >
-                  </p>
-                  <p class="text-slate-600 dark:text-slate-400 mt-1">
-                    팩스: 02-1234-5679
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="bg-background-light dark:bg-slate-800 rounded-2xl p-6 shadow-md border border-primary/5"
-            >
-              <div class="flex items-start gap-4">
-                <div
-                  class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0"
-                >
-                  <span class="material-symbols-outlined">mail</span>
-                </div>
-                <div>
-                  <p class="font-bold text-lg mb-1">이메일</p>
-                  <a
-                    href="mailto:info@hangyeom.kr"
-                    class="text-primary font-medium hover:underline"
-                  >
-                    info@hangyeom.kr
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="bg-background-light dark:bg-slate-800 rounded-2xl p-6 shadow-md border border-primary/5"
-            >
-              <div class="flex items-start gap-4">
-                <div
-                  class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0"
-                >
-                  <span class="material-symbols-outlined">schedule</span>
-                </div>
-                <div>
-                  <p class="font-bold text-lg mb-2">운영 시간</p>
-                  <div class="space-y-1 text-slate-600 dark:text-slate-400">
-                    <p class="flex justify-between gap-8">
-                      <span>평일</span>
-                      <span class="font-medium">09:00 ~ 18:00</span>
-                    </p>
-                    <p class="flex justify-between gap-8">
-                      <span>토요일</span>
-                      <span class="font-medium text-slate-400">휴무</span>
-                    </p>
-                    <p class="flex justify-between gap-8">
-                      <span>일요일/공휴일</span>
-                      <span class="font-medium text-slate-400">휴무</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div id="location-contact-placeholder"></div>
           </div>
         </div>
       </div>
@@ -438,6 +346,7 @@
 
     <div id="footer-placeholder"></div>
 
+    <script src="js/site-data.js"></script>
     <script src="js/components.js"></script>
     <script>
       // 카카오맵 초기화 (경상북도 구미시 선산대로 51)
