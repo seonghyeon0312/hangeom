@@ -1,12 +1,92 @@
 (function () {
-  // 현재 페이지 감지
   const page = location.pathname.split("/").pop() || "index.html";
 
-  // 네비게이션 링크 클래스 생성 헬퍼
-  function navLinkClass(targetPage) {
-    return page === targetPage
-      ? "text-base font-bold text-primary"
-      : "text-base font-medium hover:text-primary transition-colors";
+  // 네비게이션 메뉴 구조
+  const navGroups = [
+    {
+      label: "센터 소개",
+      pages: ["about.html", "events.html", "visit.html"],
+      children: [
+        { label: "인사말",          href: "about.html"  },
+        { label: "한겸복지센터 행사", href: "events.html" },
+        { label: "면회 및 외출",    href: "visit.html"  },
+      ]
+    },
+    {
+      label: "공동생활가정·주간보호",
+      pages: ["newsletter.html", "snack-menu.html", "monthly-plan.html", "activities.html", "home-care.html", "care-activity.html"],
+      children: [
+        { label: "소식지",          href: "newsletter.html"   },
+        { label: "간식식단표",      href: "snack-menu.html"   },
+        { label: "월간계획표",      href: "monthly-plan.html" },
+        { label: "인지활동/신체활동", href: "activities.html"  },
+        { label: "방문요양안내",    href: "home-care.html"    },
+        { label: "보호/활동",       href: "care-activity.html"},
+      ]
+    },
+    {
+      label: "한겸복지센터",
+      pages: ["admission.html", "facilities.html", "notice.html"],
+      children: [
+        { label: "입소안내",  href: "admission.html"  },
+        { label: "시설",      href: "facilities.html" },
+        { label: "공지사항",  href: "notice.html"     },
+      ]
+    },
+    {
+      label: "찾아오시는 길",
+      href: "location.html",
+      pages: ["location.html"],
+    }
+  ];
+
+  function desktopNavItem(group) {
+    const isActive = group.pages.includes(page);
+    const parentClass = isActive
+      ? "text-base font-bold text-primary flex items-center gap-0.5"
+      : "text-base font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors flex items-center gap-0.5";
+
+    if (!group.children) {
+      return `<a class="${parentClass}" href="${group.href}">${group.label}</a>`;
+    }
+
+    return `
+      <div class="relative group">
+        <button class="${parentClass} cursor-pointer bg-transparent border-none p-0">
+          ${group.label}
+          <span class="material-symbols-outlined transition-transform duration-200 group-hover:rotate-180" style="font-size:18px;">expand_more</span>
+        </button>
+        <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 w-52 z-50">
+          <div class="bg-white dark:bg-slate-800 shadow-xl rounded-xl border border-slate-100 dark:border-slate-700 py-2 overflow-hidden">
+            ${group.children.map(child => {
+              const childActive = page === child.href;
+              return `<a href="${child.href}" class="block px-5 py-2.5 text-base ${childActive ? "text-primary font-bold bg-primary/5" : "text-slate-700 dark:text-slate-200 hover:bg-primary/5 hover:text-primary"} transition-colors">${child.label}</a>`;
+            }).join("")}
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function mobileNavItem(group, idx) {
+    if (!group.children) {
+      const isActive = page === group.href;
+      return `<a class="text-base font-medium ${isActive ? "text-primary font-bold" : "text-slate-700 dark:text-slate-200 hover:text-primary"} transition-colors" href="${group.href}">${group.label}</a>`;
+    }
+
+    const isActive = group.pages.includes(page);
+    return `
+      <div class="border-b border-primary/10 pb-2">
+        <button class="mobile-group-btn w-full flex items-center justify-between py-1 text-base font-medium ${isActive ? "text-primary" : "text-slate-700 dark:text-slate-200"}" data-idx="${idx}">
+          <span>${group.label}</span>
+          <span class="material-symbols-outlined transition-transform" style="font-size:18px;">expand_more</span>
+        </button>
+        <div class="mobile-group-children hidden pl-3 mt-2 space-y-2" data-idx="${idx}">
+          ${group.children.map(child => {
+            const childActive = page === child.href;
+            return `<a href="${child.href}" class="block py-1.5 text-base ${childActive ? "text-primary font-bold" : "text-slate-500 dark:text-slate-400 hover:text-primary"} transition-colors">${child.label}</a>`;
+          }).join("")}
+        </div>
+      </div>`;
   }
 
   // nav 템플릿
@@ -19,14 +99,9 @@
           </div>
           <a href="index.html" class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white hover:text-primary transition-colors">한겸복지센터</a>
         </div>
-        <div class="hidden md:flex items-center gap-10">
-          <div class="flex gap-8">
-            <a class="${navLinkClass("about.html")}" href="about.html">센터소개</a>
-            <a class="${navLinkClass("programs.html")}" href="programs.html">프로그램 안내</a>
-            <a class="${navLinkClass("notice.html")}" href="notice.html">공지사항</a>
-            <a class="${navLinkClass("location.html")}" href="location.html">오시는 길</a>
-          </div>
-          <a href="location.html" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+        <div class="hidden md:flex items-center gap-8">
+          ${navGroups.map(g => desktopNavItem(g)).join("")}
+          <a href="location.html" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all shadow-md shadow-primary/20 flex-shrink-0">
             상담 문의하기
           </a>
         </div>
@@ -34,12 +109,9 @@
           <span class="material-symbols-outlined">menu</span>
         </button>
       </div>
-      <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-primary/10 pt-4 flex flex-col gap-4">
-        <a class="${navLinkClass("about.html")}" href="about.html">센터소개</a>
-        <a class="${navLinkClass("programs.html")}" href="programs.html">프로그램 안내</a>
-        <a class="${navLinkClass("notice.html")}" href="notice.html">공지사항</a>
-        <a class="${navLinkClass("location.html")}" href="location.html">오시는 길</a>
-        <a href="location.html" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all text-center">
+      <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-primary/10 pt-4 flex flex-col gap-3">
+        ${navGroups.map((g, i) => mobileNavItem(g, i)).join("")}
+        <a href="location.html" class="mt-2 bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all text-center">
           상담 문의하기
         </a>
       </div>
@@ -73,12 +145,12 @@
         <div class="flex flex-col gap-6">
           <h4 class="font-bold text-lg border-b border-primary/20 pb-2">빠른 메뉴</h4>
           <div class="grid grid-cols-2 gap-3">
-            <a class="hover:text-primary transition-colors" href="programs.html">이용 안내</a>
-            <a class="hover:text-primary transition-colors" href="#">자원봉사 신청</a>
-            <a class="hover:text-primary transition-colors" href="#">후원 안내</a>
-            <a class="hover:text-primary transition-colors" href="#">식단표 확인</a>
-            <a class="hover:text-primary transition-colors" href="#">갤러리</a>
-            <a class="hover:text-primary transition-colors" href="#">인재 채용</a>
+            <a class="hover:text-primary transition-colors" href="about.html">센터 소개</a>
+            <a class="hover:text-primary transition-colors" href="notice.html">공지사항</a>
+            <a class="hover:text-primary transition-colors" href="home-care.html">방문요양안내</a>
+            <a class="hover:text-primary transition-colors" href="admission.html">입소안내</a>
+            <a class="hover:text-primary transition-colors" href="activities.html">인지/신체활동</a>
+            <a class="hover:text-primary transition-colors" href="location.html">찾아오시는 길</a>
           </div>
         </div>
         <div class="flex flex-col gap-6">
@@ -92,9 +164,9 @@
                 </div>
                 <span class="font-medium text-sm">${s.label}</span>
               </a>
-            `).join('')}
+            `).join("")}
           </div>
-          <div class="mt-4 p-4 bg-white/50 dark:bg-slate-800/50 rounded-xl">
+          <div class="p-4 bg-white/50 dark:bg-slate-800/50 rounded-xl">
             <p class="text-sm text-slate-500">Copyright © 2024 한겸복지센터. All rights reserved.</p>
           </div>
         </div>
@@ -178,5 +250,16 @@
         mobileMenu.classList.toggle("hidden");
       });
     }
+
+    // 모바일 메뉴 그룹 아코디언
+    document.querySelectorAll(".mobile-group-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var idx = this.dataset.idx;
+        var children = document.querySelector(".mobile-group-children[data-idx='" + idx + "']");
+        var icon = this.querySelector(".material-symbols-outlined");
+        children.classList.toggle("hidden");
+        icon.style.transform = children.classList.contains("hidden") ? "" : "rotate(180deg)";
+      });
+    });
   });
 })();
