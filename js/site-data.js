@@ -11,9 +11,9 @@ var SITE_INFO = {
   },
   email: "info@hangyeom.kr",
   hours: {
-    weekday: "09:00 ~ 18:00",
-    saturday: "휴무",
-    holiday: "휴무"
+    weekday: "연중무휴 24시간",
+    saturday: "연중무휴",
+    holiday: "연중무휴"
   },
   social: [
     { label: "블로그",       url: "https://blog.naver.com/welfare_center_",                              icon: "edit_note"    },

@@ -138,7 +138,7 @@
             </p>
             <p class="flex items-center gap-3">
               <span class="material-symbols-outlined text-primary text-xl">schedule</span>
-              <span>평일 ${SITE_INFO.hours.weekday} (주말/공휴일 휴무)</span>
+              <span>${SITE_INFO.hours.weekday}</span>
             </p>
           </div>
         </div>
