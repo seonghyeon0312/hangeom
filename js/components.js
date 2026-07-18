@@ -16,14 +16,20 @@
     },
     {
       label: "공동생활가정·주간보호",
-      pages: ["newsletter.html", "meal-plan.html", "monthly-plan.html", "activities.html", "home-care.html", "care-activity.html"],
+      pages: ["newsletter.html", "meal-plan.html", "monthly-plan.html", "activities.html"],
       children: [
         { label: "소식지",           href: BASE + "/community/newsletter.html"   },
         { label: "월간 식단표",      href: BASE + "/community/meal-plan.html"    },
         { label: "월간계획표",       href: BASE + "/community/monthly-plan.html" },
         { label: "인지활동/신체활동", href: BASE + "/community/activities.html"   },
-        { label: "방문요양안내",     href: BASE + "/community/home-care.html"    },
-        { label: "보호/활동",        href: BASE + "/community/care-activity.html"},
+      ]
+    },
+    {
+      label: "방문요양안내",
+      href: BASE + "/community/home-care.html",
+      pages: ["home-care.html", "care-activity.html"],
+      children: [
+        { label: "보호/활동", href: BASE + "/community/care-activity.html" },
       ]
     },
     {
@@ -52,12 +58,14 @@
       return `<a class="${parentClass}" href="${group.href}">${group.label}</a>`;
     }
 
+    // 헤더 자체가 링크인 경우(href 있음)는 <a>, 아니면 <button>
+    const trigger = group.href
+      ? `<a class="${parentClass}" href="${group.href}">${group.label}<span class="material-symbols-outlined transition-transform duration-200 group-hover:rotate-180" style="font-size:18px;">expand_more</span></a>`
+      : `<button class="${parentClass} cursor-pointer bg-transparent border-none p-0">${group.label}<span class="material-symbols-outlined transition-transform duration-200 group-hover:rotate-180" style="font-size:18px;">expand_more</span></button>`;
+
     return `
       <div class="relative group">
-        <button class="${parentClass} cursor-pointer bg-transparent border-none p-0">
-          ${group.label}
-          <span class="material-symbols-outlined transition-transform duration-200 group-hover:rotate-180" style="font-size:18px;">expand_more</span>
-        </button>
+        ${trigger}
         <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 w-52 z-50">
           <div class="bg-white dark:bg-slate-800 shadow-xl rounded-xl border border-slate-100 dark:border-slate-700 py-2 overflow-hidden">
             ${group.children.map(child => {
