@@ -1,41 +1,43 @@
 (function () {
   const page = location.pathname.split("/").pop() || "index.html";
+  // GitHub Pages는 /hangeom/ 서브디렉토리로 서빙되므로 절대경로 보정
+  const BASE = location.hostname.endsWith("github.io") ? "/hangeom" : "";
 
-  // 네비게이션 메뉴 구조 (href는 절대경로)
+  // 네비게이션 메뉴 구조 (href는 BASE + 절대경로)
   const navGroups = [
     {
       label: "센터 소개",
       pages: ["greeting.html", "events.html", "visit.html"],
       children: [
-        { label: "인사말",          href: "/about/greeting.html" },
-        { label: "한겸복지센터 행사", href: "/about/events.html"   },
-        { label: "면회 및 외출",    href: "/about/visit.html"    },
+        { label: "인사말",           href: BASE + "/about/greeting.html" },
+        { label: "한겸복지센터 행사", href: BASE + "/about/events.html"   },
+        { label: "면회 및 외출",     href: BASE + "/about/visit.html"    },
       ]
     },
     {
       label: "공동생활가정·주간보호",
       pages: ["newsletter.html", "meal-plan.html", "monthly-plan.html", "activities.html", "home-care.html", "care-activity.html"],
       children: [
-        { label: "소식지",           href: "/community/newsletter.html"   },
-        { label: "월간 식단표",      href: "/community/meal-plan.html"    },
-        { label: "월간계획표",       href: "/community/monthly-plan.html" },
-        { label: "인지활동/신체활동", href: "/community/activities.html"   },
-        { label: "방문요양안내",     href: "/community/home-care.html"    },
-        { label: "보호/활동",        href: "/community/care-activity.html"},
+        { label: "소식지",           href: BASE + "/community/newsletter.html"   },
+        { label: "월간 식단표",      href: BASE + "/community/meal-plan.html"    },
+        { label: "월간계획표",       href: BASE + "/community/monthly-plan.html" },
+        { label: "인지활동/신체활동", href: BASE + "/community/activities.html"   },
+        { label: "방문요양안내",     href: BASE + "/community/home-care.html"    },
+        { label: "보호/활동",        href: BASE + "/community/care-activity.html"},
       ]
     },
     {
       label: "한겸복지센터",
       pages: ["admission.html", "facilities.html", "notice.html"],
       children: [
-        { label: "입소안내",  href: "/center/admission.html"  },
-        { label: "시설",      href: "/center/facilities.html" },
-        { label: "공지사항",  href: "/center/notice.html"     },
+        { label: "입소안내", href: BASE + "/center/admission.html"  },
+        { label: "시설",     href: BASE + "/center/facilities.html" },
+        { label: "공지사항", href: BASE + "/center/notice.html"     },
       ]
     },
     {
       label: "찾아오시는 길",
-      href: "/location.html",
+      href: BASE + "/location.html",
       pages: ["location.html"],
     }
   ];
@@ -59,7 +61,7 @@
         <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 w-52 z-50">
           <div class="bg-white dark:bg-slate-800 shadow-xl rounded-xl border border-slate-100 dark:border-slate-700 py-2 overflow-hidden">
             ${group.children.map(child => {
-              const childActive = page === child.href;
+              const childActive = page === child.href.split("/").pop();
               return `<a href="${child.href}" class="block px-5 py-2.5 text-base ${childActive ? "text-primary font-bold bg-primary/5" : "text-slate-700 dark:text-slate-200 hover:bg-primary/5 hover:text-primary"} transition-colors">${child.label}</a>`;
             }).join("")}
           </div>
@@ -69,7 +71,7 @@
 
   function mobileNavItem(group, idx) {
     if (!group.children) {
-      const isActive = page === group.href;
+      const isActive = page === group.href.split("/").pop();
       return `<a class="text-base font-medium ${isActive ? "text-primary font-bold" : "text-slate-700 dark:text-slate-200 hover:text-primary"} transition-colors" href="${group.href}">${group.label}</a>`;
     }
 
@@ -82,7 +84,7 @@
         </button>
         <div class="mobile-group-children hidden pl-3 mt-2 space-y-2" data-idx="${idx}">
           ${group.children.map(child => {
-            const childActive = page === child.href;
+            const childActive = page === child.href.split("/").pop();
             return `<a href="${child.href}" class="block py-1.5 text-base ${childActive ? "text-primary font-bold" : "text-slate-500 dark:text-slate-400 hover:text-primary"} transition-colors">${child.label}</a>`;
           }).join("")}
         </div>
@@ -97,11 +99,11 @@
           <div class="bg-primary p-2 rounded-lg text-white">
             <span class="material-symbols-outlined block">volunteer_activism</span>
           </div>
-          <a href="/" class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white hover:text-primary transition-colors">한겸복지센터</a>
+          <a href="${BASE}/" class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white hover:text-primary transition-colors">한겸복지센터</a>
         </div>
         <div class="hidden md:flex items-center gap-8">
           ${navGroups.map(g => desktopNavItem(g)).join("")}
-          <a href="/location.html" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all shadow-md shadow-primary/20 flex-shrink-0">
+          <a href="${BASE}/location.html" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all shadow-md shadow-primary/20 flex-shrink-0">
             상담 문의하기
           </a>
         </div>
@@ -111,7 +113,7 @@
       </div>
       <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-primary/10 pt-4 flex flex-col gap-3">
         ${navGroups.map((g, i) => mobileNavItem(g, i)).join("")}
-        <a href="/location.html" class="mt-2 bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all text-center">
+        <a href="${BASE}/location.html" class="mt-2 bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all text-center">
           상담 문의하기
         </a>
       </div>
@@ -145,12 +147,12 @@
         <div class="flex flex-col gap-6">
           <h4 class="font-bold text-lg border-b border-primary/20 pb-2">빠른 메뉴</h4>
           <div class="grid grid-cols-2 gap-3">
-            <a class="hover:text-primary transition-colors" href="/about/greeting.html">센터 소개</a>
-            <a class="hover:text-primary transition-colors" href="/center/notice.html">공지사항</a>
-            <a class="hover:text-primary transition-colors" href="/community/home-care.html">방문요양안내</a>
-            <a class="hover:text-primary transition-colors" href="/center/admission.html">입소안내</a>
-            <a class="hover:text-primary transition-colors" href="/community/activities.html">인지/신체활동</a>
-            <a class="hover:text-primary transition-colors" href="/location.html">찾아오시는 길</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/about/greeting.html">센터 소개</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/center/notice.html">공지사항</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/community/home-care.html">방문요양안내</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/center/admission.html">입소안내</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/community/activities.html">인지/신체활동</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/location.html">찾아오시는 길</a>
           </div>
         </div>
         <div class="flex flex-col gap-6">
