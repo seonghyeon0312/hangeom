@@ -231,6 +231,36 @@
     </div>
   `;
 
+  // 블로그 링크 섹션 템플릿 (data-url, data-label 속성으로 주입)
+  function buildBlogLinkHTML(url, label) {
+    return `
+      <section class="py-20 bg-white dark:bg-slate-900/50">
+        <div class="max-w-2xl mx-auto px-6 lg:px-20">
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-12 shadow-md border border-slate-100 dark:border-slate-700 text-center">
+            <div class="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-6" style="background:#03C75A1A;">
+              <span class="font-black text-4xl leading-none" style="color:#03C75A;font-family:Georgia,serif;">N</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-3">네이버 블로그에서 확인하세요</h3>
+            <p class="text-slate-500 dark:text-slate-400 mb-8 leading-relaxed">
+              최신 <strong class="text-slate-700 dark:text-slate-200">${label}</strong> 내용은
+              네이버 블로그에서 업데이트됩니다.<br>아래 버튼을 눌러 바로 이동해 주세요.
+            </p>
+            <a href="${url}" target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-3 text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg text-lg hover:opacity-90"
+              style="background:#03C75A;">
+              <span class="material-symbols-outlined">open_in_new</span>
+              블로그 바로가기
+            </a>
+            <p class="text-sm text-slate-400 mt-5 flex items-center justify-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:14px;">info</span>
+              새 창에서 열립니다
+            </p>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
   // DOM 준비 후 주입 및 초기화
   document.addEventListener("DOMContentLoaded", function () {
     var navEl = document.getElementById("nav-placeholder");
@@ -250,6 +280,13 @@
         mobileMenu.classList.toggle("hidden");
       });
     }
+
+    // 블로그 링크 플레이스홀더 주입
+    document.querySelectorAll("[id^='blog-link-placeholder']").forEach(function (el) {
+      var url = el.dataset.url;
+      var label = el.dataset.label || "내용";
+      if (url) el.outerHTML = buildBlogLinkHTML(url, label);
+    });
 
     // 모바일 메뉴 그룹 아코디언
     document.querySelectorAll(".mobile-group-btn").forEach(function (btn) {
