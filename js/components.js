@@ -187,7 +187,7 @@
             `).join("")}
           </div>
           <div class="p-4 bg-white/50 dark:bg-slate-800/50 rounded-xl">
-            <p class="text-sm text-slate-500">Copyright © 2024 한겸복지센터. All rights reserved.</p>
+            <p class="text-sm text-slate-500">Copyright © ${new Date().getFullYear()} 한겸복지센터. All rights reserved.</p>
           </div>
         </div>
       </div>
