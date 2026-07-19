@@ -24,5 +24,6 @@ collections:
             fields:
               - { label: 제목, name: title, widget: string }
               - { label: 날짜, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: 카테고리, name: category, widget: select, options: ["공지", "행사", "모집", "안내"], default: "공지" }
               - { label: 내용, name: body, widget: markdown }
               - { label: 대표 이미지, name: image, widget: image, required: false }
