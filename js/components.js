@@ -1,5 +1,6 @@
 (function () {
   const page = location.pathname.split("/").pop() || "index.html";
+  const fromParam = new URLSearchParams(location.search).get("from") || "";
   // GitHub Pages는 /hangeom/ 서브디렉토리로 서빙되므로 절대경로 보정
   const BASE = location.hostname.endsWith("github.io") ? "/hangeom" : "";
 
@@ -16,22 +17,24 @@
     },
     {
       label: "공동생활가정",
+      from: "gong",
       pages: ["newsletter.html", "meal-plan.html", "monthly-plan.html", "activities.html"],
       children: [
-        { label: "소식지",        href: BASE + "/community/newsletter.html"   },
-        { label: "월간 식단표",   href: BASE + "/community/meal-plan.html"    },
-        { label: "월간계획표",    href: BASE + "/community/monthly-plan.html" },
-        { label: "활동 프로그램", href: BASE + "/community/activities.html"   },
+        { label: "소식지",        href: BASE + "/community/newsletter.html?from=gong"   },
+        { label: "월간 식단표",   href: BASE + "/community/meal-plan.html?from=gong"    },
+        { label: "월간계획표",    href: BASE + "/community/monthly-plan.html?from=gong" },
+        { label: "활동 프로그램", href: BASE + "/community/activities.html?from=gong"   },
       ]
     },
     {
       label: "주간보호",
+      from: "jugan",
       pages: ["newsletter.html", "meal-plan.html", "monthly-plan.html", "activities.html"],
       children: [
-        { label: "소식지",        href: BASE + "/community/newsletter.html"   },
-        { label: "월간 식단표",   href: BASE + "/community/meal-plan.html"    },
-        { label: "월간계획표",    href: BASE + "/community/monthly-plan.html" },
-        { label: "활동 프로그램", href: BASE + "/community/activities.html"   },
+        { label: "소식지",        href: BASE + "/community/newsletter.html?from=jugan"   },
+        { label: "월간 식단표",   href: BASE + "/community/meal-plan.html?from=jugan"    },
+        { label: "월간계획표",    href: BASE + "/community/monthly-plan.html?from=jugan" },
+        { label: "활동 프로그램", href: BASE + "/community/activities.html?from=jugan"   },
       ]
     },
     {
@@ -59,7 +62,9 @@
   ];
 
   function desktopNavItem(group) {
-    const isActive = group.pages.includes(page);
+    const pageMatch = group.pages ? group.pages.includes(page) : false;
+    const fromMatch = group.from ? fromParam === group.from : true;
+    const isActive = pageMatch && fromMatch;
     const parentClass = isActive
       ? "text-base font-bold text-primary flex items-center gap-0.5"
       : "text-base font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors flex items-center gap-0.5";
@@ -79,7 +84,9 @@
         <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 w-52 z-50">
           <div class="bg-white dark:bg-slate-800 shadow-xl rounded-xl border border-slate-100 dark:border-slate-700 py-2 overflow-hidden">
             ${group.children.map(child => {
-              const childActive = page === child.href.split("/").pop();
+              const childPage = child.href.split("?")[0].split("/").pop();
+              const childFrom = new URLSearchParams(child.href.split("?")[1] || "").get("from") || "";
+              const childActive = page === childPage && (childFrom ? fromParam === childFrom : true);
               return `<a href="${child.href}" class="block px-5 py-2.5 text-base ${childActive ? "text-primary font-bold bg-primary/5" : "text-slate-700 dark:text-slate-200 hover:bg-primary/5 hover:text-primary"} transition-colors">${child.label}</a>`;
             }).join("")}
           </div>
@@ -93,7 +100,9 @@
       return `<a class="text-base font-medium ${isActive ? "text-primary font-bold" : "text-slate-700 dark:text-slate-200 hover:text-primary"} transition-colors" href="${group.href}">${group.label}</a>`;
     }
 
-    const isActive = group.pages.includes(page);
+    const mPageMatch = group.pages ? group.pages.includes(page) : false;
+    const mFromMatch = group.from ? fromParam === group.from : true;
+    const isActive = mPageMatch && mFromMatch;
     return `
       <div class="border-b border-primary/10 pb-2">
         <button class="mobile-group-btn w-full flex items-center justify-between py-1 text-base font-medium ${isActive ? "text-primary" : "text-slate-700 dark:text-slate-200"}" data-idx="${idx}">
@@ -102,7 +111,9 @@
         </button>
         <div class="mobile-group-children hidden pl-3 mt-2 space-y-2" data-idx="${idx}">
           ${group.children.map(child => {
-            const childActive = page === child.href.split("/").pop();
+            const childPage = child.href.split("?")[0].split("/").pop();
+            const childFrom = new URLSearchParams(child.href.split("?")[1] || "").get("from") || "";
+            const childActive = page === childPage && (childFrom ? fromParam === childFrom : true);
             return `<a href="${child.href}" class="block py-1.5 text-base ${childActive ? "text-primary font-bold" : "text-slate-500 dark:text-slate-400 hover:text-primary"} transition-colors">${child.label}</a>`;
           }).join("")}
         </div>
