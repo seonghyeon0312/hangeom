@@ -14,12 +14,11 @@
   <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
     <div id="nav-placeholder"></div>
 
-    <!-- 히어로 배너 -->
     <section class="relative w-full py-24 overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-600 to-slate-500"></div>
       <div class="absolute inset-0 bg-black/25"></div>
       <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-20">
-        <nav id="breadcrumb" class="flex items-center gap-2 text-white/70 text-sm mb-5">
+        <nav class="flex items-center gap-2 text-white/70 text-sm mb-5">
           <a href="../" class="hover:text-white transition-colors">홈</a>
           <span class="material-symbols-outlined" style="font-size:16px;">chevron_right</span>
           <span>한겸복지센터</span>
@@ -31,7 +30,6 @@
       </div>
     </section>
 
-    <!-- 컨텐츠 -->
     <section class="py-20 bg-white dark:bg-slate-900/50">
       <div class="max-w-5xl mx-auto px-6 lg:px-20">
         <div id="app">
@@ -49,164 +47,123 @@
     <script>
       (function () {
         var BASE = location.hostname.endsWith("github.io") ? "/hangeom" : "";
+        var allItems = [];
 
-        var CATEGORY_STYLE = {
+        var BADGE = {
           "공지": "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300",
           "행사": "bg-orange-100 text-orange-600",
           "모집": "bg-green-100 text-green-600",
           "안내": "bg-blue-100 text-blue-600"
         };
 
+        function badge(cat) {
+          return '<span class="flex-shrink-0 px-3 py-1 rounded text-xs font-bold ' + (BADGE[cat] || BADGE["공지"]) + '">' + (cat || "공지") + '</span>';
+        }
+
         function formatDate(str) {
           if (!str) return "";
-          var d = new Date(str);
-          return d.toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" });
+          return new Date(str).toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" });
         }
 
-        function categoryBadge(cat) {
-          var style = CATEGORY_STYLE[cat] || CATEGORY_STYLE["공지"];
-          return '<span class="flex-shrink-0 px-3 py-1 rounded text-xs font-bold ' + style + '">' + (cat || "공지") + '</span>';
+        function filter(q) {
+          if (!q) return allItems;
+          var lq = q.toLowerCase();
+          return allItems.filter(function (n) { return n.title && n.title.toLowerCase().includes(lq); });
         }
 
-        function renderList(items, query) {
-          var filtered = query
-            ? items.filter(function (n) { return n.title && n.title.toLowerCase().includes(query.toLowerCase()); })
-            : items;
-
-          var listHTML = filtered.length
-            ? filtered.map(function (item, i) {
-                var realIdx = items.indexOf(item);
-                var num = items.length - realIdx;
-                return '<button onclick="showDetail(' + realIdx + ')" class="w-full flex items-center justify-between p-5 rounded-xl hover:bg-primary/5 transition-colors border-b border-slate-100 dark:border-slate-800 text-left gap-4">'
-                  + '<span class="hidden md:block w-10 text-center text-slate-400 text-sm flex-shrink-0">' + num + '</span>'
-                  + '<div class="flex items-center gap-3 flex-1 min-w-0">'
-                  + categoryBadge(item.category)
-                  + '<span class="text-base font-medium hover:text-primary truncate">' + item.title + '</span>'
-                  + '</div>'
-                  + '<span class="text-slate-400 text-sm flex-shrink-0">' + (item.date || "") + '</span>'
-                  + '</button>';
-              }).join("")
-            : '<div class="text-center py-16 text-slate-400">'
+        function rowsHTML(items) {
+          if (!items.length) {
+            return '<div class="text-center py-16 text-slate-400">'
               + '<span class="material-symbols-outlined" style="font-size:64px;">search_off</span>'
-              + '<p class="mt-4 text-lg">검색 결과가 없습니다</p>'
-              + '</div>';
+              + '<p class="mt-4 text-lg">검색 결과가 없습니다</p></div>';
+          }
+          return items.map(function (item) {
+            var idx = allItems.indexOf(item);
+            var num = allItems.length - idx;
+            return '<button onclick="goDetail(' + idx + ')" class="w-full flex items-center gap-4 p-5 rounded-xl hover:bg-primary/5 transition-colors border-b border-slate-100 dark:border-slate-800 text-left">'
+              + '<span class="hidden md:block w-10 text-center text-slate-400 text-sm flex-shrink-0">' + num + '</span>'
+              + '<div class="flex items-center gap-3 flex-1 min-w-0">'
+              + badge(item.category)
+              + '<span class="text-base font-medium truncate">' + item.title + '</span>'
+              + '</div>'
+              + '<span class="text-slate-400 text-sm flex-shrink-0">' + (item.date || "") + '</span>'
+              + '</button>';
+          }).join("");
+        }
 
-          return '<div class="mb-8">'
-            + '<div class="relative max-w-xl">'
+        function showList() {
+          history.pushState({}, "", location.pathname);
+          var q = "";
+          document.getElementById("app").innerHTML =
+            '<div class="mb-8"><div class="relative max-w-xl">'
             + '<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>'
-            + '<input id="search-input" type="text" placeholder="공지사항을 검색하세요" value="' + (query || "") + '"'
+            + '<input id="search-input" type="text" placeholder="공지사항을 검색하세요"'
             + ' class="w-full pl-12 pr-6 py-4 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-background-light dark:bg-slate-800 text-base focus:outline-none focus:border-primary transition-colors" />'
-            + '</div>'
-            + '</div>'
+            + '</div></div>'
             + '<div class="hidden md:flex items-center px-5 py-3 bg-slate-50 dark:bg-slate-800 rounded-xl mb-2 text-sm font-bold text-slate-500">'
             + '<span class="w-10 text-center">번호</span>'
             + '<span class="flex-1 ml-4">제목</span>'
-            + '<span class="w-20 text-right">날짜</span>'
+            + '<span class="w-24 text-right">날짜</span>'
             + '</div>'
-            + '<div id="notice-list">' + listHTML + '</div>';
+            + '<div id="notice-rows">' + rowsHTML(allItems) + '</div>';
+
+          document.getElementById("search-input").addEventListener("input", function () {
+            q = this.value.trim();
+            document.getElementById("notice-rows").innerHTML = rowsHTML(filter(q));
+          });
         }
 
-        function renderDetail(item, idx, total) {
+        function showDetail(idx) {
+          history.pushState({}, "", location.pathname + "?id=" + idx);
+          var item = allItems[idx];
           var bodyHTML = (typeof marked !== "undefined" && item.body)
             ? marked.parse(item.body)
             : (item.body || "").replace(/\n/g, "<br>");
-          var imageHTML = item.image
-            ? '<img src="' + item.image + '" alt="' + item.title + '" class="w-full rounded-xl object-cover max-h-80 mb-8" />'
-            : "";
-          var num = total - idx;
 
-          return '<button onclick="showList()" class="flex items-center gap-2 text-slate-500 hover:text-primary transition-colors mb-8">'
-            + '<span class="material-symbols-outlined">arrow_back</span> 목록으로'
-            + '</button>'
+          document.getElementById("app").innerHTML =
+            '<button onclick="showList()" class="flex items-center gap-2 text-slate-500 hover:text-primary transition-colors mb-8">'
+            + '<span class="material-symbols-outlined">arrow_back</span> 목록으로</button>'
             + '<article class="bg-background-light dark:bg-slate-800 rounded-2xl border border-primary/10 shadow-md overflow-hidden">'
             + '<div class="px-8 py-6 border-b border-slate-100 dark:border-slate-700">'
-            + '<div class="flex items-center gap-3 mb-3">'
-            + categoryBadge(item.category)
-            + '<span class="text-sm text-slate-400">No.' + num + '</span>'
-            + '</div>'
+            + '<div class="flex items-center gap-3 mb-3">' + badge(item.category)
+            + '<span class="text-sm text-slate-400">No.' + (allItems.length - idx) + '</span></div>'
             + '<h2 class="text-2xl font-bold mb-2">' + item.title + '</h2>'
             + '<p class="text-sm text-slate-400">' + formatDate(item.date) + '</p>'
             + '</div>'
             + '<div class="px-8 py-8">'
-            + imageHTML
+            + (item.image ? '<img src="' + item.image + '" alt="" class="w-full rounded-xl object-cover max-h-80 mb-8" />' : "")
             + '<div class="prose max-w-none text-slate-700 dark:text-slate-300 leading-relaxed space-y-3">' + bodyHTML + '</div>'
-            + '</div>'
-            + '</article>'
-            + '<div class="flex justify-between mt-6 gap-4">'
-            + (idx < total - 1 ? '<button onclick="showDetail(' + (idx + 1) + ')" class="flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-primary/10 transition-colors text-sm"><span class="material-symbols-outlined text-sm">chevron_left</span> 이전 글</button>' : '<div></div>')
+            + '</div></article>'
+            + '<div class="flex justify-between mt-6">'
+            + (idx < allItems.length - 1 ? '<button onclick="showDetail(' + (idx + 1) + ')" class="flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-primary/10 transition-colors text-sm"><span class="material-symbols-outlined text-sm">chevron_left</span> 이전 글</button>' : '<div></div>')
             + (idx > 0 ? '<button onclick="showDetail(' + (idx - 1) + ')" class="flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-primary/10 transition-colors text-sm">다음 글 <span class="material-symbols-outlined text-sm">chevron_right</span></button>' : '<div></div>')
             + '</div>';
-        }
 
-        function renderEmpty() {
-          return '<div class="text-center py-20 text-slate-400">'
-            + '<span class="material-symbols-outlined" style="font-size:64px;">inbox</span>'
-            + '<p class="mt-4 text-lg">등록된 공지사항이 없습니다</p>'
-            + '</div>';
-        }
-
-        var allItems = [];
-
-        window.showList = function (query) {
-          history.pushState({}, "", location.pathname);
-          document.getElementById("app").innerHTML = allItems.length
-            ? renderList(allItems, query || "")
-            : renderEmpty();
-          var input = document.getElementById("search-input");
-          if (input) {
-            input.addEventListener("input", function () {
-              var q = this.value.trim();
-              document.getElementById("notice-list").innerHTML = renderList(allItems, q).split('<div id="notice-list">')[1].replace(/<\/div>$/, "");
-              var filtered = q ? allItems.filter(function(n){ return n.title && n.title.toLowerCase().includes(q.toLowerCase()); }) : allItems;
-              document.getElementById("notice-list").innerHTML = filtered.length
-                ? filtered.map(function(item) {
-                    var realIdx = allItems.indexOf(item);
-                    var num = allItems.length - realIdx;
-                    return '<button onclick="showDetail(' + realIdx + ')" class="w-full flex items-center justify-between p-5 rounded-xl hover:bg-primary/5 transition-colors border-b border-slate-100 dark:border-slate-800 text-left gap-4">'
-                      + '<span class="hidden md:block w-10 text-center text-slate-400 text-sm flex-shrink-0">' + num + '</span>'
-                      + '<div class="flex items-center gap-3 flex-1 min-w-0">'
-                      + categoryBadge(item.category)
-                      + '<span class="text-base font-medium hover:text-primary truncate">' + item.title + '</span>'
-                      + '</div>'
-                      + '<span class="text-slate-400 text-sm flex-shrink-0">' + (item.date || "") + '</span>'
-                      + '</button>';
-                  }).join("")
-                : '<div class="text-center py-16 text-slate-400"><span class="material-symbols-outlined" style="font-size:64px;">search_off</span><p class="mt-4 text-lg">검색 결과가 없습니다</p></div>';
-            });
-          }
-        };
-
-        window.showDetail = function (idx) {
-          history.pushState({}, "", location.pathname + "?id=" + idx);
-          document.getElementById("app").innerHTML = renderDetail(allItems[idx], idx, allItems.length);
           window.scrollTo(0, 0);
-        };
+        }
+
+        window.goDetail = showDetail;
+
+        window.addEventListener("popstate", function () {
+          var id = new URLSearchParams(location.search).get("id");
+          if (id !== null && allItems[+id]) showDetail(+id);
+          else showList();
+        });
 
         fetch(BASE + "/data/notices.json")
           .then(function (r) { return r.json(); })
           .then(function (data) {
             allItems = (data.items || []).slice().reverse();
-            var params = new URLSearchParams(location.search);
-            var id = params.get("id");
-            if (id !== null && allItems[parseInt(id)]) {
-              showDetail(parseInt(id));
-            } else {
-              showList();
-            }
+            var id = new URLSearchParams(location.search).get("id");
+            if (id !== null && allItems[+id]) showDetail(+id);
+            else showList();
           })
           .catch(function () {
-            document.getElementById("app").innerHTML = renderEmpty();
+            document.getElementById("app").innerHTML =
+              '<div class="text-center py-20 text-slate-400">'
+              + '<span class="material-symbols-outlined" style="font-size:64px;">inbox</span>'
+              + '<p class="mt-4 text-lg">등록된 공지사항이 없습니다</p></div>';
           });
-
-        window.addEventListener("popstate", function () {
-          var params = new URLSearchParams(location.search);
-          var id = params.get("id");
-          if (id !== null && allItems[parseInt(id)]) {
-            document.getElementById("app").innerHTML = renderDetail(allItems[parseInt(id)], parseInt(id), allItems.length);
-          } else {
-            document.getElementById("app").innerHTML = allItems.length ? renderList(allItems, "") : renderEmpty();
-          }
-        });
       })();
     </script>
   </body>
