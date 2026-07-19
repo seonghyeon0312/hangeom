@@ -1,5 +1,5 @@
 (function () {
-  const page = location.pathname.split("/").pop() || "index.html";
+  const page = location.pathname.split("/").pop() || "index";
   const fromParam = new URLSearchParams(location.search).get("from") || "";
   // GitHub Pages는 /hangeom/ 서브디렉토리로 서빙되므로 절대경로 보정
   const BASE = location.hostname.endsWith("github.io") ? "/hangeom" : "";
@@ -8,56 +8,56 @@
   const navGroups = [
     {
       label: "센터 소개",
-      pages: ["greeting.html", "events.html", "visit.html"],
+      pages: ["greeting", "events", "visit"],
       children: [
-        { label: "인사말",           href: BASE + "/about/greeting.html" },
-        { label: "한겸복지센터 행사", href: BASE + "/about/events.html"   },
-        { label: "면회 및 외출",     href: BASE + "/about/visit.html"    },
+        { label: "인사말",           href: BASE + "/about/greeting" },
+        { label: "한겸복지센터 행사", href: BASE + "/about/events"   },
+        { label: "면회 및 외출",     href: BASE + "/about/visit"    },
       ]
     },
     {
       label: "공동생활가정",
       from: "gong",
-      pages: ["newsletter.html", "meal-plan.html", "monthly-plan.html", "activities.html"],
+      pages: ["newsletter", "meal-plan", "monthly-plan", "activities"],
       children: [
-        { label: "소식지",        href: BASE + "/community/newsletter.html?from=gong"   },
-        { label: "월간 식단표",   href: BASE + "/community/meal-plan.html?from=gong"    },
-        { label: "월간계획표",    href: BASE + "/community/monthly-plan.html?from=gong" },
-        { label: "활동 프로그램", href: BASE + "/community/activities.html?from=gong"   },
+        { label: "소식지",        href: BASE + "/community/newsletter?from=gong"   },
+        { label: "월간 식단표",   href: BASE + "/community/meal-plan?from=gong"    },
+        { label: "월간계획표",    href: BASE + "/community/monthly-plan?from=gong" },
+        { label: "활동 프로그램", href: BASE + "/community/activities?from=gong"   },
       ]
     },
     {
       label: "주간보호",
       from: "jugan",
-      pages: ["newsletter.html", "meal-plan.html", "monthly-plan.html", "activities.html"],
+      pages: ["newsletter", "meal-plan", "monthly-plan", "activities"],
       children: [
-        { label: "소식지",        href: BASE + "/community/newsletter.html?from=jugan"   },
-        { label: "월간 식단표",   href: BASE + "/community/meal-plan.html?from=jugan"    },
-        { label: "월간계획표",    href: BASE + "/community/monthly-plan.html?from=jugan" },
-        { label: "활동 프로그램", href: BASE + "/community/activities.html?from=jugan"   },
+        { label: "소식지",        href: BASE + "/community/newsletter?from=jugan"   },
+        { label: "월간 식단표",   href: BASE + "/community/meal-plan?from=jugan"    },
+        { label: "월간계획표",    href: BASE + "/community/monthly-plan?from=jugan" },
+        { label: "활동 프로그램", href: BASE + "/community/activities?from=jugan"   },
       ]
     },
     {
       label: "방문요양",
-      href: BASE + "/community/home-care.html",
-      pages: ["home-care.html", "care-activity.html"],
+      href: BASE + "/community/home-care",
+      pages: ["home-care", "care-activity"],
       children: [
-        { label: "보호/활동", href: BASE + "/community/care-activity.html" },
+        { label: "보호/활동", href: BASE + "/community/care-activity" },
       ]
     },
     {
       label: "한겸복지센터",
-      pages: ["admission.html", "facilities.html", "notice.html"],
+      pages: ["admission", "facilities", "notice"],
       children: [
-        { label: "입소안내", href: BASE + "/center/admission.html"  },
-        { label: "시설",     href: BASE + "/center/facilities.html" },
-        { label: "공지사항", href: BASE + "/center/notice.html"     },
+        { label: "입소안내", href: BASE + "/center/admission"  },
+        { label: "시설",     href: BASE + "/center/facilities" },
+        { label: "공지사항", href: BASE + "/center/notice"     },
       ]
     },
     {
       label: "찾아오시는 길",
-      href: BASE + "/location.html",
-      pages: ["location.html"],
+      href: BASE + "/location",
+      pages: ["location"],
     }
   ];
 
@@ -132,7 +132,7 @@
         </div>
         <div class="hidden md:flex items-center gap-8">
           ${navGroups.map(g => desktopNavItem(g)).join("")}
-          <a href="${BASE}/location.html" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all shadow-md shadow-primary/20 flex-shrink-0">
+          <a href="${BASE}/location" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all shadow-md shadow-primary/20 flex-shrink-0">
             상담 문의하기
           </a>
         </div>
@@ -142,7 +142,7 @@
       </div>
       <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-primary/10 pt-4 flex flex-col gap-3">
         ${navGroups.map((g, i) => mobileNavItem(g, i)).join("")}
-        <a href="${BASE}/location.html" class="mt-2 bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all text-center">
+        <a href="${BASE}/location" class="mt-2 bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary/90 transition-all text-center">
           상담 문의하기
         </a>
       </div>
@@ -176,12 +176,12 @@
         <div class="flex flex-col gap-6">
           <h4 class="font-bold text-lg border-b border-primary/20 pb-2">빠른 메뉴</h4>
           <div class="grid grid-cols-2 gap-3">
-            <a class="hover:text-primary transition-colors" href="${BASE}/about/greeting.html">센터 소개</a>
-            <a class="hover:text-primary transition-colors" href="${BASE}/center/notice.html">공지사항</a>
-            <a class="hover:text-primary transition-colors" href="${BASE}/community/home-care.html">방문요양안내</a>
-            <a class="hover:text-primary transition-colors" href="${BASE}/center/admission.html">입소안내</a>
-            <a class="hover:text-primary transition-colors" href="${BASE}/community/activities.html">활동 프로그램</a>
-            <a class="hover:text-primary transition-colors" href="${BASE}/location.html">찾아오시는 길</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/about/greeting">센터 소개</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/center/notice">공지사항</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/community/home-care">방문요양안내</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/center/admission">입소안내</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/community/activities">활동 프로그램</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/location">찾아오시는 길</a>
           </div>
         </div>
         <div class="flex flex-col gap-6">
