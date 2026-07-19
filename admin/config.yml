@@ -1,9 +1,6 @@
 backend:
-  name: github
-  repo: seonghyeon0312/hangeom
+  name: git-gateway
   branch: main
-  auth_type: pkce
-  app_id: Ov23lifcA9BUwHpWywXn
 
 media_folder: images/uploads
 public_folder: /images/uploads
