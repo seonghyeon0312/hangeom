@@ -3,7 +3,7 @@ backend:
   repo: seonghyeon0312/hangeom
   branch: main
   auth_type: pkce
-  app_id: GITHUB_OAUTH_APP_CLIENT_ID
+  app_id: Ov23lifcA9BUwHpWywXn
 
 media_folder: images/uploads
 public_folder: /images/uploads
