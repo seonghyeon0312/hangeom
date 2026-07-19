@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>인지활동/신체활동 | 한겸복지센터</title>
+    <title>활동 프로그램 | 한겸복지센터</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script src="../js/tailwind-config.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
@@ -13,6 +13,7 @@
   <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
     <div id="nav-placeholder"></div>
 
+    <!-- 히어로 배너 -->
     <section class="relative w-full py-24 overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-br from-teal-600 via-teal-500 to-emerald-400"></div>
       <div class="absolute inset-0 bg-black/25"></div>
@@ -22,16 +23,76 @@
           <span class="material-symbols-outlined" style="font-size:16px;">chevron_right</span>
           <span>공동생활가정·주간보호</span>
           <span class="material-symbols-outlined" style="font-size:16px;">chevron_right</span>
-          <span class="text-white font-medium">인지활동/신체활동</span>
+          <span class="text-white font-medium">활동 프로그램</span>
         </nav>
-        <h1 class="text-5xl lg:text-6xl font-black text-white leading-tight">인지활동/신체활동</h1>
-        <p class="text-white/80 text-xl mt-4">어르신들의 건강한 생활을 위한 다양한 활동을 안내해 드립니다</p>
+        <h1 class="text-5xl lg:text-6xl font-black text-white leading-tight">활동 프로그램</h1>
+        <p class="text-white/80 text-xl mt-4">어르신들의 건강하고 활기찬 생활을 위한 맞춤형 프로그램을 운영합니다</p>
       </div>
     </section>
 
+    <!-- 프로그램 카드 -->
+    <section class="py-20 bg-white dark:bg-slate-900/50">
+      <div class="max-w-7xl mx-auto px-6 lg:px-20">
+        <div class="text-center mb-14">
+          <span class="text-primary font-bold uppercase tracking-widest text-sm">Programs</span>
+          <h2 class="text-3xl font-bold mt-2">운영 프로그램</h2>
+          <p class="text-slate-500 dark:text-slate-400 mt-3 text-lg">어르신의 신체·정서·사회적 기능 유지와 향상을 위한 다양한 프로그램을 제공합니다</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <!-- 신체활동 -->
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-8 border border-primary/10 shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6">
+              <span class="material-symbols-outlined" style="font-size:32px;">fitness_center</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">신체활동</h3>
+            <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">체조, 스트레칭, 산책 등 규칙적인 신체 운동을 통해 근력·균형감각을 유지하고 건강한 몸 상태를 증진합니다.</p>
+          </div>
+
+          <!-- 인지활동 -->
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-8 border border-primary/10 shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6">
+              <span class="material-symbols-outlined" style="font-size:32px;">psychology</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">인지활동</h3>
+            <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">회상 치료, 퍼즐, 기억력 훈련 등을 통해 인지 기능 저하를 예방하고 뇌 건강을 유지합니다.</p>
+          </div>
+
+          <!-- 여가/정서활동 -->
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-8 border border-primary/10 shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6">
+              <span class="material-symbols-outlined" style="font-size:32px;">self_improvement</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">여가/정서활동</h3>
+            <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">음악, 미술, 원예 등 취미 활동을 통해 정서적 안정과 삶의 만족도를 높이는 프로그램을 운영합니다.</p>
+          </div>
+
+          <!-- 사회적응활동 -->
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-8 border border-primary/10 shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6">
+              <span class="material-symbols-outlined" style="font-size:32px;">groups</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">사회적응활동</h3>
+            <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">외출, 지역사회 참여, 공동체 활동을 통해 사회적 관계를 유지하고 일상 적응 능력을 키웁니다.</p>
+          </div>
+
+          <!-- 가족지지활동 -->
+          <div class="bg-background-light dark:bg-slate-800 rounded-2xl p-8 border border-primary/10 shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6">
+              <span class="material-symbols-outlined" style="font-size:32px;">family_restroom</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">가족지지활동</h3>
+            <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">가족 상담, 교육 프로그램 등을 통해 어르신과 가족이 함께 건강한 관계를 이어갈 수 있도록 지원합니다.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 블로그 링크 -->
     <div id="blog-link-placeholder"
       data-url="https://blog.naver.com/PostList.naver?blogId=welfare_center_&from=postList&categoryNo=14"
-      data-label="인지활동/신체활동"></div>
+      data-label="활동 프로그램"></div>
 
     <div id="footer-placeholder"></div>
     <script src="../js/site-data.js"></script>
