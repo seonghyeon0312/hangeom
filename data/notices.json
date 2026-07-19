@@ -1,3 +1,10 @@
 {
-  "items": []
+  "items": [
+    {
+      "title": "테스트 공지사항",
+      "date": "2026-07-19",
+      "body": "테스트 공지사항입니다!",
+      "image": "/images/uploads/한겸사진.jpeg"
+    }
+  ]
 }
