@@ -15,13 +15,23 @@
       ]
     },
     {
-      label: "공동생활가정·주간보호",
+      label: "공동생활가정",
       pages: ["newsletter.html", "meal-plan.html", "monthly-plan.html", "activities.html"],
       children: [
-        { label: "소식지",           href: BASE + "/community/newsletter.html"   },
-        { label: "월간 식단표",      href: BASE + "/community/meal-plan.html"    },
-        { label: "월간계획표",       href: BASE + "/community/monthly-plan.html" },
-        { label: "인지활동/신체활동", href: BASE + "/community/activities.html"   },
+        { label: "소식지",        href: BASE + "/community/newsletter.html"   },
+        { label: "월간 식단표",   href: BASE + "/community/meal-plan.html"    },
+        { label: "월간계획표",    href: BASE + "/community/monthly-plan.html" },
+        { label: "활동 프로그램", href: BASE + "/community/activities.html"   },
+      ]
+    },
+    {
+      label: "주간보호",
+      pages: ["newsletter.html", "meal-plan.html", "monthly-plan.html", "activities.html"],
+      children: [
+        { label: "소식지",        href: BASE + "/community/newsletter.html"   },
+        { label: "월간 식단표",   href: BASE + "/community/meal-plan.html"    },
+        { label: "월간계획표",    href: BASE + "/community/monthly-plan.html" },
+        { label: "활동 프로그램", href: BASE + "/community/activities.html"   },
       ]
     },
     {
@@ -159,7 +169,7 @@
             <a class="hover:text-primary transition-colors" href="${BASE}/center/notice.html">공지사항</a>
             <a class="hover:text-primary transition-colors" href="${BASE}/community/home-care.html">방문요양안내</a>
             <a class="hover:text-primary transition-colors" href="${BASE}/center/admission.html">입소안내</a>
-            <a class="hover:text-primary transition-colors" href="${BASE}/community/activities.html">인지/신체활동</a>
+            <a class="hover:text-primary transition-colors" href="${BASE}/community/activities.html">활동 프로그램</a>
             <a class="hover:text-primary transition-colors" href="${BASE}/location.html">찾아오시는 길</a>
           </div>
         </div>
