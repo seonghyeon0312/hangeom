@@ -1,0 +1,31 @@
+backend:
+  name: github
+  repo: seonghyeon0312/hangeom
+  branch: main
+  auth_type: pkce
+  app_id: GITHUB_OAUTH_APP_CLIENT_ID
+
+media_folder: images/uploads
+public_folder: /images/uploads
+
+locale: ko
+
+collections:
+  - name: notices
+    label: 공지사항
+    files:
+      - name: all_notices
+        label: 공지사항 관리
+        file: data/notices.json
+        format: json
+        fields:
+          - name: items
+            label: 공지사항 목록
+            widget: list
+            label_singular: 공지사항
+            summary: "{{fields.title}} — {{fields.date}}"
+            fields:
+              - { label: 제목, name: title, widget: string }
+              - { label: 날짜, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: 내용, name: body, widget: markdown }
+              - { label: 대표 이미지, name: image, widget: image, required: false }
