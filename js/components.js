@@ -35,7 +35,7 @@
       ]
     },
     {
-      label: "방문요양안내",
+      label: "방문요양",
       href: BASE + "/community/home-care.html",
       pages: ["home-care.html", "care-activity.html"],
       children: [
