@@ -110,85 +110,20 @@
     <!-- 4. Latest Notices -->
     <section class="bg-white dark:bg-slate-900/50 py-20">
       <div class="max-w-7xl mx-auto px-6 lg:px-20">
-        <div
-          class="flex items-end justify-between mb-10 border-b-2 border-primary/10 pb-4"
-        >
+        <div class="flex items-end justify-between mb-10 border-b-2 border-primary/10 pb-4">
           <div>
-            <span
-              class="text-primary font-bold uppercase tracking-widest text-sm"
-              >Community</span
-            >
+            <span class="text-primary font-bold uppercase tracking-widest text-sm">Community</span>
             <h2 class="text-3xl font-bold mt-1">공지사항</h2>
           </div>
-          <a
-            class="flex items-center gap-1 text-slate-500 hover:text-primary font-medium transition-colors"
-            href="center/notice.html"
-          >
+          <a class="flex items-center gap-1 text-slate-500 hover:text-primary font-medium transition-colors" href="center/notice.html">
             더보기
             <span class="material-symbols-outlined text-sm">chevron_right</span>
           </a>
         </div>
-        <div class="space-y-2">
-          <a
-            class="group flex items-center justify-between p-5 rounded-xl hover:bg-primary/5 transition-colors border-b border-slate-100 dark:border-slate-800"
-            href="center/notice.html"
-          >
-            <div class="flex items-center gap-4">
-              <span
-                class="bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded text-xs font-bold text-slate-500"
-                >공지</span
-              >
-              <span class="text-lg font-medium group-hover:text-primary"
-                >2024년 상반기 문화 프로그램 시간표 안내</span
-              >
-            </div>
-            <span class="text-slate-400 text-sm">2024.05.20</span>
-          </a>
-          <a
-            class="group flex items-center justify-between p-5 rounded-xl hover:bg-primary/5 transition-colors border-b border-slate-100 dark:border-slate-800"
-            href="center/notice.html"
-          >
-            <div class="flex items-center gap-4">
-              <span
-                class="bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded text-xs font-bold text-slate-500"
-                >행사</span
-              >
-              <span class="text-lg font-medium group-hover:text-primary"
-                >제 12회 어르신 사랑 나눔 축제 초대장</span
-              >
-            </div>
-            <span class="text-slate-400 text-sm">2024.05.15</span>
-          </a>
-          <a
-            class="group flex items-center justify-between p-5 rounded-xl hover:bg-primary/5 transition-colors border-b border-slate-100 dark:border-slate-800"
-            href="center/notice.html"
-          >
-            <div class="flex items-center gap-4">
-              <span
-                class="bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded text-xs font-bold text-slate-500"
-                >모집</span
-              >
-              <span class="text-lg font-medium group-hover:text-primary"
-                >한겸복지센터 자원봉사자 상시 모집 안내</span
-              >
-            </div>
-            <span class="text-slate-400 text-sm">2024.05.10</span>
-          </a>
-          <a
-            class="group flex items-center justify-between p-5 rounded-xl hover:bg-primary/5 transition-colors"
-            href="center/notice.html"
-          >
-            <div class="flex items-center gap-4">
-              <span
-                class="bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded text-xs font-bold text-slate-500"
-                >안내</span
-              >
-              <span class="text-lg font-medium group-hover:text-primary"
-                >가정의 달 기념 무료 건강검진 실시</span
-              >
-            </div>
-            <span class="text-slate-400 text-sm">2024.05.02</span>
-          </a>
+        <div id="main-notices" class="space-y-2">
+          <div class="text-center py-10 text-slate-300">
+            <span class="material-symbols-outlined" style="font-size:40px;">hourglass_empty</span>
+          </div>
         </div>
       </div>
     </section>
@@ -251,6 +186,37 @@
     <script src="js/site-data.js"></script>
     <script src="js/components.js"></script>
     <script>
+      (function () {
+        var BADGE = {
+          "공지": "bg-slate-100 dark:bg-slate-800 text-slate-500",
+          "행사": "bg-orange-100 text-orange-600",
+          "모집": "bg-green-100 text-green-600",
+          "안내": "bg-blue-100 text-blue-600"
+        };
+        fetch("/data/notices.json")
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            var items = (data.items || []).slice().reverse().slice(0, 4);
+            var container = document.getElementById("main-notices");
+            if (!items.length) {
+              container.innerHTML = '<p class="text-slate-400 text-center py-8">등록된 공지사항이 없습니다</p>';
+              return;
+            }
+            container.innerHTML = items.map(function (item, i) {
+              var badge = BADGE[item.category] || BADGE["공지"];
+              var isLast = i === items.length - 1;
+              return '<a class="group flex items-center justify-between p-5 rounded-xl hover:bg-primary/5 transition-colors' + (isLast ? "" : " border-b border-slate-100 dark:border-slate-800") + '" href="center/notice.html">'
+                + '<div class="flex items-center gap-4 min-w-0">'
+                + '<span class="flex-shrink-0 px-3 py-1 rounded text-xs font-bold ' + badge + '">' + (item.category || "공지") + '</span>'
+                + '<span class="text-lg font-medium group-hover:text-primary truncate">' + item.title + '</span>'
+                + '</div>'
+                + '<span class="text-slate-400 text-sm flex-shrink-0 ml-4">' + (item.date || "") + '</span>'
+                + '</a>';
+            }).join("");
+          })
+          .catch(function () {});
+      })();
+
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", function (user) {
           if (!user) {
