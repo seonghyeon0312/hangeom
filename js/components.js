@@ -252,11 +252,7 @@
         </div>
         <div>
           <p class="font-bold text-lg mb-2">운영 시간</p>
-          <div class="space-y-1 text-slate-600 dark:text-slate-400">
-            <p class="flex justify-between gap-8"><span>평일</span><span class="font-medium">${SITE_INFO.hours.weekday}</span></p>
-            <p class="flex justify-between gap-8"><span>토요일</span><span class="font-medium text-slate-400">${SITE_INFO.hours.saturday}</span></p>
-            <p class="flex justify-between gap-8"><span>일요일/공휴일</span><span class="font-medium text-slate-400">${SITE_INFO.hours.holiday}</span></p>
-          </div>
+          <p class="text-slate-600 dark:text-slate-400 font-medium">${SITE_INFO.hours.weekday}</p>
         </div>
       </div>
     </div>

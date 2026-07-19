@@ -9,9 +9,9 @@ var SITE_INFO = {
     center: "054-443-0546",
     rep: "010-5003-2581"
   },
-  email: "info@hangyeom.kr",
+  email: "sw2528@naver.com",
   hours: {
-    weekday: "연중무휴 24시간",
+    weekday: "연중무휴",
     saturday: "연중무휴",
     holiday: "연중무휴"
   },
